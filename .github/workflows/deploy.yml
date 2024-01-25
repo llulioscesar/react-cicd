@@ -56,7 +56,8 @@ jobs:
             echo "No se encontró el ID de Distribución de CloudFront."
             exit 1
           fi
-          echo "distribution_id=$output" >> $GITHUB_ENV
+          echo "distribution_id=${output}" >> $GITHUB_ENV
+
 
       
       - name: Actualizar la distribución de CloudFront
