@@ -52,7 +52,8 @@ jobs:
         run: |
           cd terraform
           output=$(terraform output -raw cloudfront_distribution_id)
-          echo "distribution_id=${output##* }" >> $GITHUB_ENV
+          distribution_id=${output%%::*}
+          echo "distribution_id=$distribution_id"
 
       - name: Imprimir ID de Distribución de CloudFront
         run: |
