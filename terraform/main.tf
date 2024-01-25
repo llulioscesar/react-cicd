@@ -10,8 +10,13 @@ resource "aws_s3_bucket" "my_bucket" {
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.my_bucket.id
 
-  index_document = "index.html"
-  error_document = "index.html"
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "index.html"
+  }
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
