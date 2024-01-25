@@ -10,10 +10,8 @@ resource "aws_s3_bucket" "my_bucket" {
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.my_bucket.id
 
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
-  }
+  index_document = "index.html"
+  error_document = "index.html"
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
@@ -45,6 +43,13 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     response_page_path = "/index.html"
   }
 
-  # Configuraciones adicionales...
-}
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
 
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+}
