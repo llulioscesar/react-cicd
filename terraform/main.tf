@@ -23,6 +23,10 @@ resource "aws_s3_bucket_website_configuration" "website" {
   }
 }
 
+output "cloudfront_distribution_id" {
+  value = aws_cloudfront_distribution.my_distribution.id
+}
+
 resource "aws_cloudfront_distribution" "my_distribution" {
   origin {
     domain_name = aws_s3_bucket.my_bucket.bucket_regional_domain_name

@@ -43,9 +43,10 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      - name: Obtener ID de Distribución de CloudFront
-        id: cloudfront
+      - name: Obtener el ID de Distribución de CloudFront
+        id: cloudfront_id
         run: echo "::set-output name=distribution_id::$(terraform output -raw cloudfront_distribution_id)"
 
       - name: Actualizar la distribución de CloudFront
-        run: aws cloudfront create-invalidation --distribution-id ${{ steps.cloudfront.outputs.distribution_id }} --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ steps.cloudfront_id.outputs.distribution_id }} --paths "/*"
+
