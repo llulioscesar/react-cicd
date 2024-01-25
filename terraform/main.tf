@@ -5,11 +5,12 @@ provider "aws" {
 resource "aws_s3_bucket" "my_bucket" {
   bucket = "crud-task-redis"
   acl    = "public-read"
+}
 
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-  }
+resource "aws_s3_bucket_website_configuration" "website" {
+  bucket          = aws_s3_bucket.my_bucket.id
+  index_document  = "index.html"
+  error_document  = "index.html"
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
@@ -18,7 +19,22 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     origin_id   = "crud-task-redis"
   }
 
+  enabled = true
+  default_root_object = "index.html"
+
   default_cache_behavior {
+    target_origin_id       = "crud-task-redis"
+    viewer_protocol_policy = "redirect-to-https"
+    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods         = ["GET", "HEAD"]
+
+    forwarded_values {
+      query_string = false
+      cookies {
+        forward = "none"
+      }
+    }
+
     custom_error_response {
       error_code         = 404
       response_code      = 200
@@ -26,6 +42,5 @@ resource "aws_cloudfront_distribution" "my_distribution" {
     }
   }
 
-  enabled             = true
-  default_root_object = "index.html"
+  # Configuraciones adicionales...
 }
