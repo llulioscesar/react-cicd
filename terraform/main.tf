@@ -8,9 +8,12 @@ resource "aws_s3_bucket" "my_bucket" {
 }
 
 resource "aws_s3_bucket_website_configuration" "website" {
-  bucket          = aws_s3_bucket.my_bucket.id
-  index_document  = "index.html"
-  error_document  = "index.html"
+  bucket = aws_s3_bucket.my_bucket.id
+
+  website {
+    index_document = "index.html"
+    error_document = "index.html"
+  }
 }
 
 resource "aws_cloudfront_distribution" "my_distribution" {
@@ -34,13 +37,14 @@ resource "aws_cloudfront_distribution" "my_distribution" {
         forward = "none"
       }
     }
+  }
 
-    custom_error_response {
-      error_code         = 404
-      response_code      = 200
-      response_page_path = "/index.html"
-    }
+  custom_error_response {
+    error_code         = 404
+    response_code      = 200
+    response_page_path = "/index.html"
   }
 
   # Configuraciones adicionales...
 }
+
