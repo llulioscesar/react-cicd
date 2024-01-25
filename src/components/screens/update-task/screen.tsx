@@ -17,12 +17,12 @@ const UpdateTaskScreen = () => {
                 .then((task) => {
                     setTask(task);
                 })
-                .catch((error) => {
+                .catch(() => {
                     alert('La tarea no existe');
                     navigate('/');
                 });
         }
-    }, [id, setTask]);
+    }, [id, navigate]);
 
     return (
         <>
