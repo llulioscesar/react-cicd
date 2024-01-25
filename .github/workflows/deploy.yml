@@ -39,6 +39,7 @@ jobs:
 
       - name: Inicializar y Aplicar Terraform
         run: |
+          cd terraform
           terraform init
           terraform apply -auto-approve
 
