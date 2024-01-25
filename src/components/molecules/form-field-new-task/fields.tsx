@@ -29,7 +29,7 @@ const FormFieldsNewTask: FC<Props> = (porps) => {
         if (porps.completed && porps.completed !== completed) {
             setCompleted(porps.completed);
         }
-    }, [porps.title, porps.description, porps.completed, setTitle, setDescription, setCompleted]);
+    }, [completed, description, porps.completed, porps.description, porps.title, title]);
 
     const handleOnChangeTitle = (value: string) => {
         setTitle(value);
@@ -54,7 +54,6 @@ const FormFieldsNewTask: FC<Props> = (porps) => {
                 {!isNew && (
                     <Check checked={completed} onChange={handleOnChangeCompleted} label='Finalizada' />
                 )}
-
             </div>
         </>
     )

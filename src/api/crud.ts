@@ -46,4 +46,5 @@ class Crud {
     }
 }
 
-export default new Crud();
+const crud = new Crud();
+export default crud;
