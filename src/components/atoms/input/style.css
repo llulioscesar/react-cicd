@@ -1,0 +1,11 @@
+.input--field {
+    outline: none;
+    padding: 6px 12px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.input--field:hover, .input--field:focus {
+    border-color: #999;
+}

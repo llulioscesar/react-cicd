@@ -1,0 +1,13 @@
+.form-new-task {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.form-new-task--actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: .75rem;
+}

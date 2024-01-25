@@ -1,0 +1,17 @@
+.item-list-task {
+    text-decoration: none;
+    color: black;
+}
+
+.item-list-task--status {
+    font-weight: bold;
+    font-size: .75rem;
+}
+
+.item-list-task--status-pending {
+    color: red;
+}
+
+.item-list-task--status-done {
+    color: green;
+}

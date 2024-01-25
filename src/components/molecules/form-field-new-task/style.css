@@ -1,0 +1,8 @@
+.form--fields--new-task {
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: flex-start;
+  max-width: 250px;
+  gap: .75rem;
+}
