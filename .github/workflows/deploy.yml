@@ -51,17 +51,13 @@ jobs:
       - name: Obtener el ID de Distribución de CloudFront
         run: |
           cd terraform
-          output=$(terraform output -raw cloudfront_distribution_id | tr -d '"')
-          if [ -z "$output" ]; then
-            echo "No se encontró el ID de Distribución de CloudFront."
-            exit 1
-          fi
-          echo "distribution_id=${output}"
-          echo "distribution_id=${output}" >> $GITHUB_ENV
+          echo "distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> $GITHUB_ENV
 
+      - name: Imprimir ID de Distribución de CloudFront
+        run: |
+          cd terraform
+          echo $(terraform output -raw cloudfront_distribution_id)
 
-
-      
       - name: Actualizar la distribución de CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ env.distribution_id }} --paths "/*"
 
