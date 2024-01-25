@@ -30,7 +30,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Desplegar a S3
-        run: aws s3 sync build/ s3://mi-bucket-de-react --delete
+        run: aws s3 sync build/ s3://crud-task-redis --delete
 
       - name: Actualizar la distribución de CloudFront
         run: aws cloudfront create-invalidation --distribution-id EDFDVBD6EXAMPLE --paths "/*"
