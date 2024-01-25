@@ -44,11 +44,15 @@ jobs:
           terraform apply -auto-approve
 
       - name: Actualizar estado de Terraform
-        run: terraform refresh
-
+        run: |
+          cd terraform
+          terraform refresh
+      
       - name: Obtener el ID de Distribución de CloudFront
         run: |
+          cd terraform
           echo "distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> $GITHUB_ENV
+
       
       - name: Actualizar la distribución de CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ env.distribution_id }} --paths "/*"
