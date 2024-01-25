@@ -48,11 +48,11 @@ jobs:
           cd terraform
           terraform refresh
       
-      - name: Obtener el ID de Distribución de CloudFront
+      - name: Establecer Variable de Entorno para el ID de Distribución de CloudFront
         run: |
           cd terraform
-          terraform output -raw cloudfront_distribution_id
-          echo "distribution_id=$(terraform output -raw cloudfront_distribution_id)" >> "$GITHUB_ENV"
+          output=$(terraform output -raw cloudfront_distribution_id | grep -o '^[^:]*')
+          echo "distribution_id=$output" >> $GITHUB_ENV
 
       - name: Imprimir ID de Distribución de CloudFront
         run: |
