@@ -57,8 +57,7 @@ jobs:
 
       - name: Imprimir ID de Distribución de CloudFront
         run: |
-          cd terraform
-          echo $(terraform output -raw cloudfront_distribution_id)
+          echo ${{ env.distribution_id }}
 
       - name: Actualizar la distribución de CloudFront
         run: aws cloudfront create-invalidation --distribution-id ${{ env.distribution_id }} --paths "/*"
